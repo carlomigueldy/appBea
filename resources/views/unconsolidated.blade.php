@@ -4,7 +4,7 @@
   <h1>Unconsolidated</h1>
   <hr>
   <form method="POST" action="JoinTableController@changetoconsolidate">
-      <table class="table table-fixed-head table-striped">
+      <table class="table table-sm table-bordered table-fixed-head table-striped">
         <thead class="thead-dark">
             <th>No.</th>
             <th>Item Name</th> 
@@ -17,7 +17,7 @@
             <th>Cost Center</th> 
             <th>Mode of Procurement</th> 
             <th>Account No.</th>
-            <th>Lot</th> 
+            {{-- <th>Lot</th>  --}}
             <th>Remarks</th> 
             <th>Action</th> 
         </thead>
@@ -29,13 +29,13 @@
               <td>{{$queryunconsolidateditem->item_description}}</td>  
               <td>{{$queryunconsolidateditem->app_specification}}</td>  
               <td>{{$queryunconsolidateditem->app_unit}}</td>  
-              <td>Php{{$queryunconsolidateditem->app_unit_price}}</td>  
+              <td>Php {{$queryunconsolidateditem->app_unit_price}}</td>  
               <td>{{$queryunconsolidateditem->quantity}}</td>  
-              <td>Php{{$queryunconsolidateditem->amount}}</td>  
+              <td>Php {{$queryunconsolidateditem->amount}}</td>  
               <td>{{$queryunconsolidateditem->costcenter_name}}</td>  
               <td>{{$queryunconsolidateditem->mop_name}}</td>  
               <td>{{$queryunconsolidateditem->acc_no}}</td>    
-              <td>{{$queryunconsolidateditem->lot_no}}</td>  
+              {{-- <td>{{$queryunconsolidateditem->lot_no}}</td>   --}}
               <td>{{$queryunconsolidateditem->remarks}}</td>     
               {{-- <td><form method="GET" action=" {{url('utc', $queryunconsolidateditem->appdetails_id)}} "> --}}
               <td>

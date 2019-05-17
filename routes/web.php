@@ -15,9 +15,9 @@
 
 Route::get('/','JoinTableController@show');  
 Route::get('/search', 'JoinTableController@search');
-Route::get('unconsolidated', 'JoinTableController@unconsolidated');
+Route::get('/unconsolidated', 'JoinTableController@unconsolidated');
 Route::get('/utc/{id}', 'JoinTableController@changetoconsolidate');
 
-Route::post('/unconsolidated', 'JoinTableController@changetoconsolidate');
+// Route::post('/unconsolidated', 'JoinTableController@changetoconsolidate');
 
-Route::resource('unconsolidated', 'JointTableController');
+Route::resource('unconsolidated', 'JoinTableController');

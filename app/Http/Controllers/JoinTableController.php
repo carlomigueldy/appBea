@@ -34,17 +34,12 @@ class JoinTableController extends Controller
             ->rightjoin('mops', 'mops.mop_id', '=', 'appdetails.mop_id')
             ->rightjoin('costcenters', 'costcenters.costcenter_id', '=', 'appdetails.costcenter_id')
             ->rightjoin('account', 'account.acc_id', '=', 'appdetails.acc_id') 
-              ->where('appdetails.remarks', '=', 'unconsolidated')
-             
-                ->get();
+            ->where('appdetails.remarks', '=', 'unconsolidated')
+            ->get();
 
         //$queries = \DB::getQueryLog();
-
-
          //dd($queryunconsolidateditems);
-
             return view('/unconsolidated', compact('queryunconsolidateditems'));  
-
         }
 
     public function search(jointableValidation $request)
@@ -52,12 +47,7 @@ class JoinTableController extends Controller
         $type = $request->input('select_app_type');
         $quarter = $request->input('quarter');
         $year = $request->input('year');
-
-       
-
         //\DB::connection()->enableQueryLog();
-        
-       
         
         if($quarter == "Annual"){
             $datas = DB::table('appdetails')
@@ -70,10 +60,7 @@ class JoinTableController extends Controller
             ->where('apps.app_type', '=', $type)
             ->where('appdetails.remarks', '=', 'consolidated')  
             ->get();
-
-
-        }
-        else{
+        }else{
             $datas = DB::table('appdetails')
                 ->leftJoin('apps', 'apps.app_id', '=', 'appdetails.app_id') 
                 ->leftJoin('items', 'items.id', '=', 'appdetails.item_id') 
@@ -85,19 +72,10 @@ class JoinTableController extends Controller
                 ->where('apps.app_type', '=', $type)
                 ->where('appdetails.remarks', '=', 'consolidated') 
                 ->get();
-
         }
-        
-
-        
-         
-          
         //$queries = \DB::getQueryLog();
- 
         //dd($datas);
-
-        
-        return view('/data',compact('datas'));
+        return view('/data')->with('datas', $datas)->with('type', $type)->with('quarter', $quarter)->with('year', $year);
     }
 
     public function changetoconsolidate(Request $request)
