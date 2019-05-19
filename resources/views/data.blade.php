@@ -6,6 +6,7 @@
 <h6>Type: {{$type}}</h6>
 <h6>Quarter: {{$quarter}}</h6>
 {{-- <a href="{{action('PDFController@downloadPDF', 1)}}">PDF</a> --}}
+{{-- <a href="{{ route('pdfview',['download'=>'pdf']) }}">Download PDF</a> --}}
   <hr>
   <table class="table table-sm table-bordered table-fixed-head table-striped">
     <thead class="thead-dark">

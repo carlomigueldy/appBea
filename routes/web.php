@@ -25,4 +25,8 @@ Route::put('consolidations', 'JoinTableController@update');
 // Route::resource('unconsolidated', 'JoinTableController');
 
 // Export to PDF route
-Route::get('/downloadPDF','PDFController@downloadPDF');
+Route::get('downloadPDF','PDFController@downloadPDF');
+
+Route::get('generate-pdf','HomeController@generatePDF');
+
+Route::get('pdfview',array('as'=>'pdfview','uses'=>'PDFController@pdfview'));
