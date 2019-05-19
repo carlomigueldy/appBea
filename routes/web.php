@@ -13,11 +13,13 @@
 
  
 
-Route::get('/','JoinTableController@show');  
+Route::get('/','JoinTableController@index');  
 Route::get('/search', 'JoinTableController@search');
 Route::get('/unconsolidated', 'JoinTableController@unconsolidated');
 Route::get('/utc/{id}', 'JoinTableController@changetoconsolidate');
 
-// Route::post('/unconsolidated', 'JoinTableController@changetoconsolidate');
+Route::post('/unconsolidated', 'JoinTableController@update');
+Route::put('consolidations', 'JoinTableController@update');
+// Route::post('changetoconsolidate', 'JoinTableController@store');
 
-Route::resource('unconsolidated', 'JoinTableController');
+// Route::resource('unconsolidated', 'JoinTableController');

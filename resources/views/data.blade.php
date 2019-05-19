@@ -47,4 +47,5 @@
         </tr>
     </tbody> 
   </table>
+  {{-- {{$datas->links()}} --}}
 @endsection

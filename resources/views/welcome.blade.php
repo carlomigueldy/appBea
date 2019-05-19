@@ -29,7 +29,7 @@
                             <option value="2019">2019</option>
                         </select> 
                         <hr>
-                        <input type="submit" class="btn float-right btn-outline-danger">
+                        <input type="submit" class="btn float-right btn-primary btn-block">
                     </div>
                 </div>
             </div>
