@@ -23,3 +23,6 @@ Route::put('consolidations', 'JoinTableController@update');
 // Route::post('changetoconsolidate', 'JoinTableController@store');
 
 // Route::resource('unconsolidated', 'JoinTableController');
+
+// Export to PDF route
+Route::get('/downloadPDF','PDFController@downloadPDF');

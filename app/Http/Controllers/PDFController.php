@@ -3,42 +3,45 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use PDF;
 
 class PDFController extends Controller
 {
-    public function downloadPDF($id){
-        // $purchaserequests = PurchaseRequest::find($id);
-        $purchaserequests = DB::table('purchase_requests')
-        ->join('cost_centers','cost_centers.id','purchase_requests.costcenter_id')
-        ->join(
-            'fund_sources', '
-            fund_sources.id', 
-            'purchase_requests.fundsource_id'
-            )
-        ->select(
-            'cost_centers.costcenter_name', 
-            'fund_sources.source', 
-            'purchase_requests.sai_number', 
-            'purchase_requests.purpose', 
-            'purchase_requests.request_origin', 
-            'purchase_requests.approved_by', 
-            'purchase_requests.costcenter_id', 
-            'purchase_requests.fundsource_id',
-            'purchase_requests.id', 
-            'purchase_requests.date'
-        )
-        ->where(
-            'purchase_requests.id', $id
-            )
-        ->get();
-        $requestdetails = DB::table('purchase_request_details')
-        ->join('items', 'items.id', 'purchase_request_details.item_id')
-        ->select('items.description', 'purchase_request_details.estimate_unit_cost', 'purchase_request_details.quantity', 'purchase_request_details.estimated_cost', 
-        'purchase_request_details.item_id', 'purchase_request_details.id', 'purchase_request_details.purq_id')
-        ->where('purchase_request_details.purq_id', $id)
-        ->get();
-  
-        $pdf = PDF::loadView('purchaserequests.pdf', compact('purchaserequests', 'requestdetails'));
-        return $pdf->download('invoice.pdf');
+    public function downloadPDF(Request $request){
+        $type = $request->input('select_app_type');
+        $quarter = $request->input('quarter');
+        $year = $request->input('year');
+        
+        if($quarter == "Annual"){
+            $datas = DB::table('appdetails')
+            ->leftJoin('apps', 'apps.app_id', '=', 'appdetails.app_id') 
+            ->leftJoin('items', 'items.id', '=', 'appdetails.item_id') 
+            ->rightjoin('mops', 'mops.mop_id', '=', 'appdetails.mop_id')
+            ->rightjoin('costcenters', 'costcenters.costcenter_id', '=', 'appdetails.costcenter_id') 
+            ->rightjoin('account', 'account.acc_id', '=', 'appdetails.acc_id') 
+            ->where('apps.app_year', '=', $year)
+            ->where('apps.app_type', '=', $type)
+            ->where('appdetails.remarks', '=', 'consolidated')
+            ->get();
+
+            $pdf = PDF::loadView('pdf', compact('datas'));
+            return $pdf->download('invoice.pdf');
+        }else{
+            $datas = DB::table('appdetails')
+            ->leftJoin('apps', 'apps.app_id', '=', 'appdetails.app_id') 
+            ->leftJoin('items', 'items.id', '=', 'appdetails.item_id') 
+            ->rightjoin('mops', 'mops.mop_id', '=', 'appdetails.mop_id')
+            ->rightjoin('costcenters', 'costcenters.costcenter_id', '=', 'appdetails.costcenter_id')
+            ->rightjoin('account', 'account.acc_id', '=', 'appdetails.acc_id') 
+            ->where('apps.quarter', '=', $quarter)  
+            ->where('apps.app_year', '=', $year)
+            ->where('apps.app_type', '=', $type)
+            ->where('appdetails.remarks', '=', 'consolidated') 
+            ->get();
+
+            $pdf = PDF::loadView('pdf', compact('datas'));
+            return $pdf->download('invoice.pdf');
+        }
       }
 }
