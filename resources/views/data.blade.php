@@ -7,7 +7,14 @@
 <h6>Quarter: {{$quarter}}</h6>
 {{-- <a href="{{action('PDFController@downloadPDF', 1)}}">PDF</a> --}}
 {{-- <a href="{{ route('pdfview',['download'=>'pdf']) }}">Download PDF</a> --}}
-  <hr>
+{{-- <button type="button" onclick="printJS('printJS-form', 'html')" class="btn btn-primary">
+  Print PDF
+</button> --}}
+
+{{-- <a href="#" id="print" onclick="javascript:printlayer('div-id-name')">Report Print</a> --}}
+{{-- <a href="javascript:genPDF()">Download PDF</a>   --}}
+<a href="#" onclick="HTMLtoPDF()">Download PDF</a>
+<hr>
   <table class="table table-sm table-bordered table-fixed-head table-striped">
     <thead class="thead-dark">
         <th>No.</th>
