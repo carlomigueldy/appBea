@@ -13,7 +13,7 @@
 
 {{-- <a href="#" id="print" onclick="javascript:printlayer('div-id-name')">Report Print</a> --}}
 {{-- <a href="javascript:genPDF()">Download PDF</a>   --}}
-<a href="#" onclick="HTMLtoPDF()">Download PDF</a>
+<a href="#" onclick="window.print()">Download PDF</a>
 <hr>
   <table class="table table-sm table-bordered table-fixed-head table-striped">
     <thead class="thead-dark">
